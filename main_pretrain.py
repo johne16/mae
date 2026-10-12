@@ -207,6 +207,8 @@ def main(args):
                 log_writer.flush()
             with open(os.path.join(args.output_dir, "log.txt"), mode="a", encoding="utf-8") as f:
                 f.write(json.dumps(log_stats) + "\n")
+            with open(os.path.join(args.output_dir, "timing.json"), mode="w", encoding="utf-8") as f:
+                f.write(json.dumps({'unit': 'epoch', 'completed': epoch + 1 - args.start_epoch, 'total': args.epochs, 'elapsed_seconds': time.time() - start_time}) + "\n")
 
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
